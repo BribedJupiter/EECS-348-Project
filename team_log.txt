@@ -2,9 +2,10 @@
 Team Meeting 9.24
 WHEN: Sunday, September 24th @ 2:30pm
 WHERE: The Nest Lawrence, poolside. 
-PURPOSE: First team meeting. Designate & design roles, begin project documentation and organization.
+PURPOSE: First team meeting. Decide a team name. Designate & design roles, begin project documentation and organization.
 ATTENDANCE: 5/5 --> Michael Stang, Blake Carlson, Logan Smith, Jack Bauer, Holden Vail
 
+--> First, we setup a group chat for general project related discussion and we used / will use the Canvas group to organize our meetings.
 --> We began with a discussion as to which roles we may need, what their responsibilities may be, and what methodology our process should follow. 
 --> We decided we will follow Agile (Scrum) methodology to ensure our ability to adapt to changes and respond to the variable nature of the life of a college student. 
 
@@ -41,5 +42,28 @@ Requirements and Quality Lead: Holden Vail
 		- Ensure tasks are completed by deadlines and follow up with team members to minimize blockers
 		- Assisting where needed
 
+--> There was very little disagreement about roles and responsibilities, and so we were able to complete this portion relatively quickly and without any legitamate conflict.
+--> We took a short break in order to move locations to charge our laptops.
+--> We began the process of deciding on a team name
+
+Agenda Item 2: Team Name
+	Ideas:
+		- Team 17
+		- 17 Co. 
+		- Pool Co.
+		- pool.io
+		- pool.co
+		- poolio.co
+
+--> We decided on 17 Co. because our group number on Canvas is 17. 
+--> We decided our project name (which may change throughout development) will be "17 Co. Calculator".
+--> We began work on our Software Development Plan.
+	- We faced some technical difficulties using Microsoft Word's collaboration feature, in particular the internet was unstable and so it took a while for word to update for everyone when one person made changes. But, we proceeded with caution and were ultimately successful despite the inefficiency.  
+
+--> We added a variety of responsibilities to be completed before the next meeting:
+	- The Requirements and Quality Lead must ensure the creation and initial draft of the Vision Document.
+	- The Assistant Team Administrator will ensure the completion of meeting logs and the creation and initial draft of the project glossary.
+	- The Technical Lead and Design Lead will ensure the creation and initial draft of project iteration plans. 
+	- The Team Administrator will ensure the completion of all these tasks.
 
 ######### END TEAM MEETING NOTES 9/24/2023 #########
