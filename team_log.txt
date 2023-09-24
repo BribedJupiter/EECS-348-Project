@@ -1,1 +1,30 @@
+MEETING NOTES
 
+
+Team Meeting 9.07
+WHEN: Wednesday, September 7th @ 10:00am
+PURPOSE: First team meeting, set up ATTENDANCE: (every team member) Claire Thompson, Olivia Romig, Emmy Richardson, Elise
+Lovell, Ron Heminway, Libby Miller (virtually) Libby is out with covid at the moment, so we called her so she could be included in our
+conversation. Emmy started a GitHub repository and emailed every member of our team a link to it, then sent
+out invites to each of us to be a collaborator on the repository.
+We then brainstormed ideas for team names and decided roles for each person.
+
+
+TEAM NAME IDEAS:
+DinoDevs
+REEL CO
+
+
+ROLES:
+Team Administrator: Claire Thompson
+Assistant Team Administrator: Olivia Romig
+Project Leader: Emmy Richardson
+Assistant Project Leader: Elise Lovell
+Technical Leader: Ron Heminway
+Data Administrator/Quality Assurance Engineer: Libby Miller 
+
+Elise then had to leave to go to a class. We have a group chat with all of our members so that we can keep in contact outside of meetings. Elise will also have these meeting notes to
+reference what we discussed the rest of the meeting. We discussed which casing we want to use for our project so that everything is uniform. We
+decided on snake case.
+We decided on the team name 'REEL CO". I quickly made a logo corresponding to our name.
+We also decided on the responsibilities for each of the team members' roles.
