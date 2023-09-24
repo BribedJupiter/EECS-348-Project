@@ -1,30 +1,45 @@
-MEETING NOTES
+######### BEGIN TEAM MEETING NOTES 9/24/2023 #########
+Team Meeting 9.24
+WHEN: Sunday, September 24th @ 2:30pm
+WHERE: The Nest Lawrence, poolside. 
+PURPOSE: First team meeting. Designate & design roles, begin project documentation and organization.
+ATTENDANCE: 5/5 --> Michael Stang, Blake Carlson, Logan Smith, Jack Bauer, Holden Vail
+
+--> We began with a discussion as to which roles we may need, what their responsibilities may be, and what methodology our process should follow. 
+--> We decided we will follow Agile (Scrum) methodology to ensure our ability to adapt to changes and respond to the variable nature of the life of a college student. 
+
+Agenda Item 1: Role designation:
+Team Administrator: Michael Stang
+	Responsible for:
+		- Organizing & leading team meetings
+		- Establishing agendas & setting internal deadlines
+		- Ensuring proper communication between roles
+		- Coordinating with stakeholders 
+		- General team communication with outside entities, in particular in regards to internal relations
+		- Assisting where needed
+Assistant Team Administrator: Jack Bauer
+	Responsible for:
+		- Recording team meetings & taking and posting minutes
+		- Assisting the team administrator with misc tasks
+		- Filling in for the team administrator in extentuating circumstances 
+		- Managing the GitHub repository and ensuring completion of deliverables
+		- Assisting where needed
+Technical Lead: Blake Carlson
+	Responsible for:
+		- Lead the implementation of the Design Lead's requirements
+		- Assign technical tasks to team members but be ultimately responsible for their completion
+		- Assisting where needed
+Design Lead: Logan Smith
+	Responsible for:
+		- Lead the creation of design deliverables and design requirements
+		- Ensure technical implementations are completed in accordance with design requirements
+		- Assisting where needed
+Requirements and Quality Lead: Holden Vail
+	Responsible for:
+		- Lead the Requirement Engineering phase of the project
+		- Ensure quality and completion of design and implementation in accordance with designated requirements
+		- Ensure tasks are completed by deadlines and follow up with team members to minimize blockers
+		- Assisting where needed
 
 
-Team Meeting 9.07
-WHEN: Wednesday, September 7th @ 10:00am
-PURPOSE: First team meeting, set up ATTENDANCE: (every team member) Claire Thompson, Olivia Romig, Emmy Richardson, Elise
-Lovell, Ron Heminway, Libby Miller (virtually) Libby is out with covid at the moment, so we called her so she could be included in our
-conversation. Emmy started a GitHub repository and emailed every member of our team a link to it, then sent
-out invites to each of us to be a collaborator on the repository.
-We then brainstormed ideas for team names and decided roles for each person.
-
-
-TEAM NAME IDEAS:
-DinoDevs
-REEL CO
-
-
-ROLES:
-Team Administrator: Claire Thompson
-Assistant Team Administrator: Olivia Romig
-Project Leader: Emmy Richardson
-Assistant Project Leader: Elise Lovell
-Technical Leader: Ron Heminway
-Data Administrator/Quality Assurance Engineer: Libby Miller 
-
-Elise then had to leave to go to a class. We have a group chat with all of our members so that we can keep in contact outside of meetings. Elise will also have these meeting notes to
-reference what we discussed the rest of the meeting. We discussed which casing we want to use for our project so that everything is uniform. We
-decided on snake case.
-We decided on the team name 'REEL CO". I quickly made a logo corresponding to our name.
-We also decided on the responsibilities for each of the team members' roles.
+######### END TEAM MEETING NOTES 9/24/2023 #########
