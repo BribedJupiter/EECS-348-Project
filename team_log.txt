@@ -7,7 +7,6 @@ ATTENDANCE: 5/5 --> Michael Stang, Blake Carlson, Logan Smith, Jack Bauer, Holde
 
 --> First, we setup a group chat for general project related discussion and we used / will use the Canvas group to organize our meetings.
 --> We began with a discussion as to which roles we may need, what their responsibilities may be, and what methodology our process should follow. 
---> We decided we will follow Agile (Scrum) methodology to ensure our ability to adapt to changes and respond to the variable nature of the life of a college student. 
 
 Agenda Item 1: Role designation:
 Team Administrator: Michael Stang
@@ -22,7 +21,7 @@ Assistant Team Administrator: Jack Bauer
 	Responsible for:
 		- Recording team meetings & taking and posting minutes
 		- Assisting the team administrator with misc tasks
-		- Filling in for the team administrator in extentuating circumstances 
+		- Filling in for the team administrator in extenuating circumstances 
 		- Managing the GitHub repository and ensuring completion of deliverables
 		- Assisting where needed
 Technical Lead: Blake Carlson
@@ -42,7 +41,7 @@ Requirements and Quality Lead: Holden Vail
 		- Ensure tasks are completed by deadlines and follow up with team members to minimize blockers
 		- Assisting where needed
 
---> There was very little disagreement about roles and responsibilities, and so we were able to complete this portion relatively quickly and without any legitamate conflict.
+--> There was very little disagreement about roles and responsibilities, and so we were able to complete this portion relatively quickly and without any legitimate conflict.
 --> We took a short break in order to move locations to charge our laptops.
 --> We began the process of deciding on a team name
 
@@ -59,11 +58,13 @@ Agenda Item 2: Team Name
 --> We decided our project name (which may change throughout development) will be "17 Co. Calculator".
 --> We began work on our Software Development Plan.
 	- We faced some technical difficulties using Microsoft Word's collaboration feature, in particular the internet was unstable and so it took a while for word to update for everyone when one person made changes. But, we proceeded with caution and were ultimately successful despite the inefficiency.  
+	- We had a lot of discussions about how to structure the project, and ultimately decided to use incremental phases, based upon the assignment dates of each section in the syllabus, with each Phase including multiple iterations to be implemented and executed by the appropriate lead. For example, the requirements engineering phase and its iterations will be planned and led by the Requirements and Quality lead.
 
 --> We added a variety of responsibilities to be completed before the next meeting:
-	- The Requirements and Quality Lead must ensure the creation and initial draft of the Vision Document.
+	- The Requirements and Quality Lead must ensure the creation and initial draft of the Vision Document and plan the requirements engineering phase.
 	- The Assistant Team Administrator will ensure the completion of meeting logs and the creation and initial draft of the project glossary.
 	- The Technical Lead and Design Lead will ensure the creation and initial draft of project iteration plans. 
-	- The Team Administrator will ensure the completion of all these tasks.
+	- The Team Administrator will ensure the completion of all tasks and schedule the next meeting and will create a checklist of items to complete, based on the Software Development Plan, at the start of each Phase and each iteration with the appropriate feedback and input from each lead.
 
+--> The next meeting will be scheduled by the Team Administrator in Canvas.
 ######### END TEAM MEETING NOTES 9/24/2023 #########
