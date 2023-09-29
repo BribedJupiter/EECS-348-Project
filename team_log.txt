@@ -68,3 +68,34 @@ Agenda Item 2: Team Name
 
 --> The next meeting will be scheduled by the Team Administrator in Canvas.
 ######### END TEAM MEETING NOTES 9/24/2023 #########
+
+######### BEGIN TEAM MEETING NOTES 9/29/2023 #########
+Team Meeting 9.29
+WHEN: Friday, September 29th @ 4:00pm
+WHERE: The Nest Lawrence. 
+PURPOSE: Second team meeting. Planning the requirements specification completion process, and will complete EC Quiz 1 if there is time.
+ATTENDANCE: 5/5 --> Michael Stang, Blake Carlson, Logan Smith, Jack Bauer, Holden Vail
+
+--> We began by confirming role knowledge and going over the agenda and objectives for the meeting.
+--> We decided, since our last meeting ran for around 5 hours, we will not complete work necessarily during the meeting but will instead assign new tasks for people to complete on their own time
+--> Today we begin a new phase, with this phase being lead by our Requirements and Quality Lead: Holden.
+--> He needs to complete various tasks as specified in our Software Development Plan, and there are a variety of other plans and documents that must be completed by a variety of other team members, such as the iteration plans. 
+--> A few updates must also be made to the Software Development Plan, as specified at the beginning of each phase.
+--> Holden suggested we post assignments to individuals through Canvas as needed, so he and Michael will work on completing that, in order to achieve greater efficiency and clarity in tasks. 
+--> While we have a shared folder of live documents on Canvas, when versions are completed they will be goldenized and uploaded to GitHub. 
+--> Jack will begin the Project Glossary
+--> We had a great discussion about what each of us will be responsible according to our roles
+	For example: Holden takes in a problem and figures out what features need to be made. Logan takes in those features and designs more high level details such as what classes we need. Blake takes that design specification and figures out how we will implement those technically. We then take that, optimize, fix bugs, etc which Holden will make sure matches our requirements. Michael and Jack organize the whole project.  
+
+Phase 2 Objectives:
+- Completion of Software Requirements Specification - Holden leads
+- Glossary creation - Jack
+- Establish meeting cadence - Michael
+- Establish a proper review process - Michael
+
+--> We planned the dates and deadlines for new meetings, work completed, etc.
+Backlog (a list of tasks that need to be done to complete the phase) due 10/4
+Requirements Specification due 10/13 (due for class on 10/15)
+Glossary due 10/13
+
+--> Our next meeting will be October 2nd, 4pm @ The Nest, Lawrence
