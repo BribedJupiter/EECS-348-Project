@@ -100,3 +100,33 @@ Glossary due 10/13
 
 --> Our next meeting will be October 2nd, 4pm @ The Nest, Lawrence
 ######### END TEAM MEETING NOTES 9/29/2023 #########
+
+######### BEGIN TEAM MEETING NOTES 10/2/2023 #########
+Team meeting 10.2
+WHEN: Monday, October 2nd @ 4:00pm
+WHERE: The Nest Lawrence. 
+PURPOSE: Third team meeting. Holden provides tasks in order to complete requirements engineering phase.
+ATTENDANCE: 5/5 --> Michael Stang, Blake Carlson, Logan Smith, Jack Bauer, Holden Vail
+
+--> Holden, as phase leader, began by delegating tasks for the requirements engineering phase. The documents are all in One Drive.
+--> From correspondence with the Professor, we will not use Canvas announcements as much because he was being unnecessarily notified by our Canvas page. Most other correspondence  will be conducted in less formal settings as required. We will also still have information on the "pages" tab in Canvas.
+--> Our team is now focused on completing the Software Requirements Specification.
+
+For the Software Requirements Specifications. More details are in the Meeting 3 Agenda:
+ - Michael completes sections 1-1.5 by 10/13
+ - Blake completes sections 2-2.1.7 by 10/5
+ - Jack completes sections 2.2-3.1 by 10/11
+ - Holden completes sections 3.1.1-3.1.15 by 10/3
+ - Logan completes sections 3.2-5 by 10/8
+
+--> Holden will develop and communicate an iteration plan to specify how the Software Requirements Specification will be completed. This will be the general order of completion that we have decided on. We will follow a schedule in completing this. 
+ - Holden --> Blake --> Logan --> Jack --> Michael
+ - 10/3	      10/5      10/8      10/11    10/13
+
+--> We will also review each other's work to make sure everything is communicated well and as we intend.
+
+--> NOTE: While completing this phase, make sure to continue referencing the Project Description document "00-Project-Description.pdf".
+
+--> Our next meeting is tentatively 10/19 @ 4:15 pm 
+
+######### END TEAM MEETING NOTES 10/2/2023 #########
