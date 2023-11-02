@@ -130,3 +130,50 @@ For the Software Requirements Specifications. More details are in the Meeting 3 
 --> Our next meeting is tentatively 10/19 @ 4:15 pm 
 
 ######### END TEAM MEETING NOTES 10/2/2023 #########
+
+######### BEGIN TEAM MEETING NOTES 11/2/2023 #########
+Team meeting 11.2
+WHEN: Thursday, November 2nd @ 4:00pm
+WHERE: The Nest Lawrence. 
+PURPOSE: Fourth team meeting. 
+ATTENDANCE: 5/5 --> Michael Stang, Blake Carlson, Logan Smith, Jack Bauer, Holden Vail
+
+--> Requirements engineering phase has been completed as specified earlier. We communicated asynchronously to pass the parts of the phease from team member to team member, and completed the deliverables on time to specficiation.
+--> We began with a discussion of objectives, followed by a phase description from Logan, and a look ahead into the future.
+--> We reminded our team members that deadlines are important and we must be done by deadlines.
+--> We also reminded our team members that we must match formatting across team members when working on a document
+--> Phase 3 - Design Phase
+	- Objective 1: 
+		- New document!!! Software Architecture due to professor 11/12 @ 11:59 pm 
+		- due 11/11 @ 11:59pm to Michael
+		- due 11/10 @ 11:59pm to Logan (Design lead)
+		- All but part 1 due 11/8 @ 11:59pm
+	- Objective 2: Update SDP
+--> Objective 1 tasks due 11/8 @ 11:59pm:
+	- Document part 1 - Michael
+	- Document part 2 - Jack
+	- Document part 3 - Jack
+	- Document part 4 - Not necessary to complete
+	- Document part 5 - Blake
+	- Document part 6 - Logan
+	- Document part 7 - Not necessary to comeplete
+	- Document part 8 - Holden
+--> After assigning document completion, we began a discussion of architecture. Ideas:
+	- Using C++
+	- Get string input from console, output a string
+	- Will likely need to use vectors in order to iterate by character
+	- Check if a character is numeric to tell pieces apart, have a second vector of equal length of 0's or 1's to signal if a character is a number or letter in the first vector.
+	- Iterate to break up the vector into parts
+	- Simplify function, potentially recursively, and eventually out a number. A function to get the next step. A function to check if valid. 
+	- Etc. This will be further refined.
+	- We have a loose sketch in document D0010
+--> On the class level, parts 4, 5, 6 due 12/3
+--> Here is an outline of what we're planning:
+	- Part 4.1: Implementation --> 11/8 - 11/21
+	- Part 5: Test cases --> 11/22 - 11/24
+	- Part 4.2: Fixed implementation --> 11/25 - 11/26
+	- Part 6: User manual --> 11/27 - 11/30
+	- 12/1-12/2 everyone must go through and make sure everything looks good, especially Michael
+	- All deadlines at 11:59pm
+--> Our next meeting is tentatively 11/12 @ 4pm
+######### END TEAM MEETING NOTES 11/2/2023 #########
