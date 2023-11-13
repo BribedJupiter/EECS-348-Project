@@ -177,3 +177,103 @@ ATTENDANCE: 5/5 --> Michael Stang, Blake Carlson, Logan Smith, Jack Bauer, Holde
 	- All deadlines at 11:59pm
 --> Our next meeting is tentatively 11/12 @ 4pm
 ######### END TEAM MEETING NOTES 11/2/2023 #########
+
+######### BEGIN TEAM MEETING NOTES 11/12/2023 #########
+Team meeting 11.12
+WHEN: Sunday, November 12th @ 7:00pm
+WHERE: The Nest Lawrence. 
+PURPOSE: Fifth team meeting. 
+ATTENDANCE: 5/5 --> Michael Stang, Blake Carlson, Logan Smith, Jack Bauer, Holden Vail
+
+--> We began with a discussion on deadlines and how we must follow our own internal deadlines.
+--> We also began with a discussion on quality and how it went on our last document.
+--> The bottom line is that as a whole we must put a renewed focus on keeping up with deadlines and quality assurance.
+--> We will also be changing our return time, and implement a reviews process.
+	- Assignments will be reviewed, and notes will be provided to the author so they can fix it themselves. 
+	- Due dates will be sooner, and assignments will be reviewed by the phase lead and team lead. 
+	- Documents also will be locked at deadlines. 
+--> We are now beginning the implementation phase
+	- We must further our github, i.e. add a readme, organize it for the future, consolidate docs, etc.
+	- We must also work on the GitHub page
+--> New deadlines:
+	- Implementation due from Blake to team lead on Monday 11/20 by 11:59pm
+	- Implementation feedback returned on 11/21 
+	- Feedback fixed by 11/26
+	- Test cases due 11/27
+	- User manual due 11/28
+	- User manual feedback by 11/29
+	- User manual final due 11/30
+--> Implementation phase will be run by Blake
+--> Must be written in C++
+--> Semantics & standards
+	- camelCase
+	- Docstrings - 1..2 sentences, brief inline comments
+		- Comments within reason. Explain purpose and high level what's happening at least
+	- Constants all uppercase
+
+Function definitions:
+for (...) {
+	// looped code here
+}
+
+If-else:
+if (...) {
+	
+} if else {
+	
+} else {
+
+}
+
+--> Program flowchat - refer to document D00004
+	- Text based UI - step 1
+		- In: math expression
+		- Out: answer
+		- Expressions will be stored as a string
+	- Expression symbol check - Step 1.5
+		- In: string
+		- Out: string
+		- Check valid symbols - character, operator, parenthesis, number, etc.
+		- Check at least one character
+	- Expression conversion function - step 2
+		- In: math expression
+		- Out: well formatted expression
+		- Using vectors potentially
+		- Idea - key vector and expression vector:
+			- 0, 1, 2, 3
+			- number, operator, open parenthesis, close parenthesis
+	- Expression validity check - step 2.5
+		- So that the calculator can assume good input
+	- expression calculator - step 3
+		- In: well formatted expression
+		- Out: expression solution
+		- If a function finds no solution, it will return an error. So, we must have error handling
+	- Potentially will need to loop conversion and calculator multiple times
+
+- Both key and expression vectors will propgrate through the whole system, but for simplicity I will just refer to both as "vector" for IO and ease of reading purposes, unless where necessary to differentiate.
+- Basic schema:
+- Console --> IN (out: string) --> prelim check (out: string) --> vectorify (out: vector) --> check valid (out: error or vector)
+	--> recursive solve (final out: vector w/ length 1) --> OUT (value) --> Console
+- Recursive solve
+	- Basis: a vector with length 1
+	- calls vector solve (inputs and outputs a vector) to simplify the expression
+- Vector solve
+	- Simplify the expression by one step
+	- Part 1 - Find next step
+	- Part 2 - Calculate & refactor expression, make a new key
+
+- Using math library
+
+--> We will also implement a code review system and we will implement an error handling in IN with error types
+	- At least divide by zero and syntax error
+--> Parts:
+	- IN/OUT --> Holden - and handle errors 
+	- Check symbol --> Holden
+	- Check valid --> Holden
+	- Vectorify --> Holden
+	- RecSolve & Simplify -->  Michael, Logan, Blake, Jack
+	- GitHub readme & organizing GitHub --> Jack
+--> Blake will review Holden's parts
+--> Jack and Holden will review everyone else
+
+######### END TEAM MEETING NOTES 11/12/2023 #########
