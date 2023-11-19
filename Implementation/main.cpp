@@ -16,6 +16,7 @@ void preValidateInput(string userInput);
 vector<vector<char> > vectorify(string inputString);
 bool isValid(vector<vector<char> > input);              //Input is in the first index, key is in the second
 void printOutput(vector<char> output);
+void solveStep(vector<int>& numbers, vector<char>& key, int start_index);
 
 
 int main(){
@@ -159,5 +160,40 @@ void printOutput(vector<char> output){
     /*This is the function that outputs the final result*/
     for (int i = 0; i < output.size(); i++){
         cout << output[i];
+    }
+}
+
+void solveStep(vector<int>& numbers, vector<char>& key, int start_index) {
+    // Take in an expression vector, a key vector, and what the next step to perform is and update the vectors to simplify the expression.
+    
+    int answer;  // Variable that holds the answer to the step
+    if (key[start_index] == '('){  // Checks if the step is a paranthesis reduction step i.e. "(10)" -> "10"
+        numbers[start_index] = numbers[start_index+1];
+        key[start_index] = '0';
+        numbers.erase(numbers.begin() + start_index+2);  // Edits the expression vector
+        numbers.erase(numbers.begin() + start_index+1);
+        key.erase(key.begin() + start_index+2);  // Edits the key vector
+        key.erase(key.begin() + start_index+1);
+    } else {  // If it's a normal math expression... 
+        if (key[start_index + 1] == '+') {  // Checks what operation
+            answer = numbers[start_index] + numbers[start_index + 2];
+        } else if (key[start_index + 1] == '-'){
+            answer = numbers[start_index] - numbers[start_index + 2];
+        } else if (key[start_index + 1] == '*'){
+            answer = numbers[start_index] * numbers[start_index + 2];
+        } else if (key[start_index + 1] == '/'){
+            answer = numbers[start_index] / numbers[start_index + 2];
+        } else if (key[start_index + 1] == '%'){
+            answer = numbers[start_index] % numbers[start_index + 2];
+        }  else if (key[start_index + 1] == '^'){
+            answer = pow(numbers[start_index], numbers[start_index + 2]);
+        }
+        
+        numbers[start_index] = answer; // Sets the first number in expression to the answer (so that it works when there is only expression left)
+        key[start_index] = '0';  // Updates key
+        numbers.erase(numbers.begin() + start_index + 2);  // Gets rid of used elements
+        numbers.erase(numbers.begin() + start_index + 1);
+        key.erase(key.begin() + start_index + 2);
+        key.erase(key.begin() + start_index + 1);
     }
 }
