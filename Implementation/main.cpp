@@ -210,7 +210,7 @@ bool isValid(vector<vector<char> > inputVecVec){
     for (int i = 0; i < key.size(); i++){
         if (key[i] == '+' || key[i] == '-'){
             try {
-                if (key[i+1] != '0'){
+                if (key[i+1] != '0' && key[i+1] != '('){
                     cout << "HERE3!";
                     return false;
                 }
@@ -221,7 +221,7 @@ bool isValid(vector<vector<char> > inputVecVec){
     }
     for (int i = 0; i < key.size(); i++){
         if (key[i] == '(' && i != 0){
-            if (key[i-1] != '0'){
+            if (key[i-1] == '0'){
                 cout << "HERE4!";
                 return false;
             }
