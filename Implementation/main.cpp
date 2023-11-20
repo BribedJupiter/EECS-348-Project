@@ -22,6 +22,34 @@ int nextStep(vector<char> &keyVec, vector<int> &intVec);
 void recSolve(vector<char> &keyVec, vector<int> &intVec);
 vector<int> intify(vector<char> &expression, vector<char> &key);
 
+void print_expression(vector<int>& numVector, vector<char>& charVector) {
+    cout << "\n";
+    for (int i = 0; i < charVector.size(); i++) {
+        if (charVector[i] == '0') {
+            cout << numVector[i] << " ";
+        } else {
+            cout << charVector[i] << " ";
+        }
+    }
+    cout << "\n";
+}
+
+void print_vector(vector<int>& myVector) {
+    cout << "\nPRINTING: ";
+    for (int i = 0; i < myVector.size(); i++) {
+        cout << myVector[i] << " ";
+    }
+    cout << "\n";
+}
+
+void print_vector(vector<char>& myVector) {
+    cout << "\nPRINTING: ";
+    for (int i = 0; i < myVector.size(); i++) {
+        cout << myVector[i] << " ";
+    }
+    cout << "\n";
+}
+
 int main(){
     /*This is the main function for the program*/
     string userInput;
@@ -36,12 +64,12 @@ int main(){
             cout << "Invalid input" << endl;
             continue;
         }
-        vector<vector<char>> vectorifiedOutput = vectorify(userInput); //Vectorifies the input to a vector of vectors vectorifiedOutput
+        vector<vector<char> > vectorifiedOutput = vectorify(userInput); //Vectorifies the input to a vector of vectors vectorifiedOutput
         // input, key
         if (isValid(vectorifiedOutput) == true){                        //If valid, your program below...
             cout << "Valid" << endl;
             vector<int> intVec = intify(vectorifiedOutput[0], vectorifiedOutput[1]);
-            recSolve(vectorifiedOutput[0], intVec);
+            recSolve(vectorifiedOutput[1], intVec);
         }else{
             cout << "Invalid" << endl;
         }
@@ -95,7 +123,7 @@ vector<vector<char> > vectorify(string inputString){
     return output;
 }
 
-vector<int> intify(vector<char> &expression, vector<char> &key) {
+vector<int> intify(vector<char>& expression, vector<char>& key) {
     /*This function combines split numbers, adds them to a new integer vector and updates the key accordingly*/
     vector<int> intVector;
     vector<char> newKey;
@@ -130,12 +158,12 @@ vector<int> intify(vector<char> &expression, vector<char> &key) {
         newKey.push_back('0');
     }
 
-    key = newKey; // Updates the key
+    swap(key, newKey); // Updates the key
 
     return intVector;
 }
 
-bool isValid(vector<vector<char>> inputVecVec){
+bool isValid(vector<vector<char> > inputVecVec){
     /*
     Valid statements must adhere to the following the the following only:
     1. For each opening paranthesis, there must be a closing paranthesis and vice versa
@@ -205,13 +233,12 @@ bool isValid(vector<vector<char>> inputVecVec){
 void printOutput(vector<int> output){
     /*This is the function that outputs the final result*/
     for (int i = 0; i < output.size(); i++){
-        cout << output[i];
+        cout << output[i] << "\n";
     }
 }
 
 void solveStep(vector<int>& numbers, vector<char>& key, int start_index) {
     // Take in an expression vector, a key vector, and what the next step to perform is and update the vectors to simplify the expression.
-    
     int answer;  // Variable that holds the answer to the step
     if (key[start_index] == '('){  // Checks if the step is a paranthesis reduction step i.e. "(10)" -> "10"
         numbers[start_index] = numbers[start_index+1];
