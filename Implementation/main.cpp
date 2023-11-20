@@ -189,10 +189,11 @@ bool isValid(vector<vector<char> > inputVecVec){
         if (key[i] == '('){
             openCount++;
         }
+    }
     if (openCount != closeCount){
         return false;
     }
-    }
+
     for (int i = 0; i < key.size(); i++){
         if (key[i] == '*' || key[i] == '/' || key[i] == '%' || key[i] == '^'){
             try {
