@@ -191,15 +191,16 @@ bool isValid(vector<vector<char> > inputVecVec){
         }
     }
     if (openCount != closeCount){
+        cout << "Unmatched Paranethesis!\n";
         return false;
-        cout << "HERE2!";
+        
     }
 
     for (int i = 0; i < key.size(); i++){
         if (key[i] == '*' || key[i] == '/' || key[i] == '%' || key[i] == '^'){
             try {
                 if ((key[i-1] != '0' && key[i-1] != ')') || (key[i+1] != '0' && key[i+1] != '(')){
-                    cout << "HERE!";
+                    cout << "Invalid usage of operator *, /, %, or ^\n";
                     return false;
                 }
             }catch (out_of_range& e){
@@ -211,7 +212,7 @@ bool isValid(vector<vector<char> > inputVecVec){
         if (key[i] == '+' || key[i] == '-'){
             try {
                 if (key[i+1] != '0' && key[i+1] != '('){
-                    cout << "HERE3!";
+                    cout << "Invalid usage of operator + or -\n";
                     return false;
                 }
             }catch (out_of_range& e){
@@ -222,13 +223,13 @@ bool isValid(vector<vector<char> > inputVecVec){
     for (int i = 0; i < key.size(); i++){
         if (key[i] == '(' && i != 0){
             if (key[i-1] == '0'){
-                cout << "HERE4!";
+                cout << "Invalid usage of (\n";
                 return false;
             }
         }
         if (key[i] == ')' && i != key.size() - 1){
-            if (key[i+1] == '0'){
-                cout << "HERE5!";
+            if (key[i+1] == '0' || key[i+1] == '('){
+                cout << "Invalid usage of )\n";
                 return false;
             }
         }
