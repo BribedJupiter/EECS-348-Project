@@ -5,6 +5,7 @@ Last Updated: 14 November 2023
 */
 
 #include <iostream>
+#include <cmath>
 #include <string>
 #include <vector>
 #include <stdexcept>                                    //Use  stdexcept for error catching
