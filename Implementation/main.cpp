@@ -88,7 +88,7 @@ string collectInput(){
 
 void preValidateInput(string userInput){
     /*This is the function that does a pre-check for invalid characters*/
-    string validCharList = "0123456789+-*/()^%";
+    string validCharList = "0123456789+-*/()^% ";
     string validInput;
 
     for (int i = 0; i < userInput.size(); i++){
@@ -108,13 +108,15 @@ vector<vector<char> > vectorify(string inputString){
     vector<char> key;
 
     for (int i = 0; i < inputString.size(); i++){
-        input.push_back(inputString[i]);
+        if(inputString[i] != ' '){
+            input.push_back(inputString[i]);
+        }
     }
 
     for (int i = 0; i < inputString.size(); i++){
         if (inputString[i] == '1' || inputString[i] == '2' || inputString[i] == '3' || inputString[i] == '4' || inputString[i] == '5' || inputString[i] == '6' || inputString[i] == '7' || inputString[i] == '8' || inputString[i] == '9'){
             key.push_back('0');
-        }else{
+        }else if( inputString[i] != ' '){
             key.push_back(inputString[i]);
         }
     }
@@ -178,7 +180,12 @@ bool isValid(vector<vector<char> > inputVecVec){
             key.erase(key.begin() + i);
             i--;
         }
-
+    for (int i = key.size() -1; i > 0; i--){            //This loop removes all spaces in key
+        if (key[i] == ' '){
+            key.erase(key.begin() + i);
+            i--;
+        }
+    }
     }
     int openCount = 0;
     int closeCount = 0;
@@ -196,7 +203,7 @@ bool isValid(vector<vector<char> > inputVecVec){
         
     }
 
-    for (int i = 0; i < key.size(); i++){
+    for (int i = 0; i < key.size(); i++){                                       //checking operator usage
         if (key[i] == '*' || key[i] == '/' || key[i] == '%' || key[i] == '^'){
             try {
                 if ((key[i-1] != '0' && key[i-1] != ')') || (key[i+1] != '0' && key[i+1] != '(')){
@@ -208,10 +215,10 @@ bool isValid(vector<vector<char> > inputVecVec){
             }
         }
     }
-    for (int i = 0; i < key.size(); i++){
+    for (int i = 0; i < key.size(); i++){                                   // checking operaotr usage
         if (key[i] == '+' || key[i] == '-'){
             try {
-                if (key[i+1] != '0' && key[i+1] != '('){
+                if (key[i+1] != '0' && key[i+1] != '(' && key[i+1] != '-'){
                     cout << "Invalid usage of operator + or -\n";
                     return false;
                 }
