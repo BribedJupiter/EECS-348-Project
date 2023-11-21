@@ -1,7 +1,7 @@
 /*
 17 Calculator Co.
 Version 1.0
-Last Updated: 14 November 2023
+Last Updated: 20 November 2023
 */
 
 #include <iostream>
@@ -312,24 +312,25 @@ int nextStep(vector<char> &keyVec, vector<int> &intVec) {
         }
     }
 
-    // Case 3 - num-operator-num --> e.g. 3*2
-    //      Handle in order of PEMDAS
-    //      Valid operators --> [+, -, *, /, %, ^]   
-    for (int i = 0; i < keyVec.size() - 2; i++) {
-        if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') {
-            if (keyVec[i+1] == '^') {
+    // Case 3 - num-operator-num --> e.g. 3*2 or 5^1
+    //      Handle in order of operations with modulo having the same precedence as multiplication and division.
+    //      Valid operators --> [+, -, *, /, %, ^]
+    //      Three groups of precedence. Each group is evaluated from left to right
+    //                1: Exponentials: e.g. 5^3
+    //                2: Multiplication / Division / Modulo: e.g. 3*2, 8/4, and 7%3 
+    //                3: Addition / Subtraction: e.g. 6+9 or 2-1
+    for (int i = 0; i < keyVec.size() - 2; i++) { // Iterates through the key vector
+        if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') { // Checks for an instance of num-operator-num
+            if (keyVec[i+1] == '^') { // If there is an instance of an exponential, it determines it to be the next step and returns the index of the first number in the grouping
                 return i;
             }
         }
     }
 
     for (int i = 0; i < keyVec.size() - 2; i++) {
-        if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') {
-            if (keyVec[i+1] == '*' or keyVec[i+1] == '/' or keyVec[i+1] == '%') {
-                if (keyVec[i+1] == '^') {
-                    return i;
-                }
-                else if (keyVec[i+1] == '*') {
+        if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') { // Checks again for an instance of num-operator-num in the key vector
+            if (keyVec[i+1] == '*' or keyVec[i+1] == '/' or keyVec[i+1] == '%') { // If there is an instance of multiplication, division, or modulo, returns the index of the first number in the grouping
+                if (keyVec[i+1] == '*') {
                     return i;
                 }
                 else if (keyVec[i+1] == '/') {
@@ -343,8 +344,8 @@ int nextStep(vector<char> &keyVec, vector<int> &intVec) {
     }
 
     for (int i = 0; i < keyVec.size() - 2; i++) {
-        if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') {
-            if (keyVec[i+1] == '+' || keyVec[i+1] == ('-')) {
+        if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') { // Checks again for an instance of num-operator-num in the key vector
+            if (keyVec[i+1] == '+' || keyVec[i+1] == ('-')) { // If there is an instance of addition or subtraction, returns the index of the first number in the grouping
                 if (keyVec[i+1] == '+') {
                     return i;
                 }
@@ -354,13 +355,13 @@ int nextStep(vector<char> &keyVec, vector<int> &intVec) {
             }
         }
     }
-    return 0; // this is not ideal
+    return 0; // Should never be reached, but if none of the following situations are found, returns 0.
 }
 
 void recSolve(vector<char> &keyVec, vector<int> &intVec) {
-    // Recursively solve the expression
-    while (intVec.size() >= 1) {
-        if (intVec.size() == 1) {
+    // Uses a while loop to continually simplify the expresion step by step until a final solution is reached
+    while (intVec.size() >= 1) { // Checks if the size of the integer vector is greater than or equal to 1
+        if (intVec.size() == 1) { // If the size is exactly 1, then a solution has been reached. The printOutput function prints the solution to the terminal
             printOutput(intVec);
             break;
         }
