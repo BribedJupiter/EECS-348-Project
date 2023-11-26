@@ -215,7 +215,7 @@ bool isValid(vector<vector<char> > inputVecVec){
             }
         }
     }
-    for (int i = 0; i < key.size(); i++){                                   // checking operaotr usage
+    for (int i = 0; i < key.size(); i++){                                   // checking operator usage
         if (key[i] == '+' || key[i] == '-'){
             try {
                 if (key[i+1] != '0' && key[i+1] != '(' && key[i+1] != '-'){
@@ -252,7 +252,7 @@ void printOutput(vector<int> output){
 }
 
 void solveStep(vector<int>& numbers, vector<char>& key, int start_index) {
-    // Take in an expression vector, a key vector, and what the next step to perform is and update the vectors to simplify the expression.
+    /* Take in an expression vector, a key vector, and what the next step to perform is and update the vectors to simplify the expression. */
     int answer;  // Variable that holds the answer to the step
     if (key[start_index] == '('){  // Checks if the step is a paranthesis reduction step i.e. "(10)" -> "10"
         numbers[start_index] = numbers[start_index+1];
@@ -291,7 +291,7 @@ void solveStep(vector<int>& numbers, vector<char>& key, int start_index) {
 //      intVector - integers, Cannot be used to know where there is an operator, as we may have zeroes --> [302] - int vec
 //      keyVector - 0 in place of integer, otherwise symbol --> [0+0] - char vec
 int nextStep(vector<char> &keyVec, vector<int> &intVec) {
-    // Find the index of the beginning of the next step
+    /* Find the index of the beginning of the next step */
 
     // Case 1- Is there an instance (num) - pass out [(num)] --> e.g. (3)
     // keyVec.size() - 1 = the last index of keyVecs
@@ -366,7 +366,7 @@ int nextStep(vector<char> &keyVec, vector<int> &intVec) {
 }
 
 void recSolve(vector<char> &keyVec, vector<int> &intVec) {
-    // Uses a while loop to continually simplify the expresion step by step until a final solution is reached
+    /* Uses a while loop to continually simplify the expresion step by step until a final solution is reached */
     while (intVec.size() >= 1) { // Checks if the size of the integer vector is greater than or equal to 1
         if (intVec.size() == 1) { // If the size is exactly 1, then a solution has been reached. The printOutput function prints the solution to the terminal
             printOutput(intVec);
