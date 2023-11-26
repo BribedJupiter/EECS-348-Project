@@ -17,12 +17,12 @@ void preValidateInput(string userInput);
 vector<vector<char> > vectorify(string inputString);
 bool isValid(vector<vector<char> > input);              //Input is in the first index, key is in the second
 void printOutput(vector<char> output);
-void solveStep(vector<int>& numbers, vector<char>& key, int start_index);
-int nextStep(vector<char> &keyVec, vector<int> &intVec);
-void recSolve(vector<char> &keyVec, vector<int> &intVec);
-vector<int> intify(vector<char> &expression, vector<char> &key);
+void solveStep(vector<double>& numbers, vector<char>& key, int start_index);
+int nextStep(vector<char> &keyVec, vector<double> &doubVec);
+void recSolve(vector<char> &keyVec, vector<double> &doubVec);
+vector<double> intify(vector<char> &expression, vector<char> &key);
 
-void print_expression(vector<int>& numVector, vector<char>& charVector) {
+void print_expression(vector<double>& numVector, vector<char>& charVector) {
     cout << "\n";
     for (int i = 0; i < charVector.size(); i++) {
         if (charVector[i] == '0') {
@@ -34,7 +34,7 @@ void print_expression(vector<int>& numVector, vector<char>& charVector) {
     cout << "\n";
 }
 
-void print_vector(vector<int>& myVector) {
+void print_vector(vector<double>& myVector) {
     cout << "\nPRINTING: ";
     for (int i = 0; i < myVector.size(); i++) {
         cout << myVector[i] << " ";
@@ -68,7 +68,7 @@ int main(){
         // input, key
         if (isValid(vectorifiedOutput) == true){                        //If valid, your program below...
             cout << "Valid" << endl;
-            vector<int> intVec = intify(vectorifiedOutput[0], vectorifiedOutput[1]);
+            vector<double> intVec = intify(vectorifiedOutput[0], vectorifiedOutput[1]);
             recSolve(vectorifiedOutput[1], intVec);
         }else{
             cout << "Invalid" << endl;
@@ -125,9 +125,9 @@ vector<vector<char> > vectorify(string inputString){
     return output;
 }
 
-vector<int> intify(vector<char>& expression, vector<char>& key) {
+vector<double> intify(vector<char>& expression, vector<char>& key) {
     /*This function combines split numbers, adds them to a new integer vector and updates the key accordingly*/
-    vector<int> intVector;
+    vector<double> intVector;
     vector<char> newKey;
 
     int currentNumber = 0;
@@ -244,16 +244,16 @@ bool isValid(vector<vector<char> > inputVecVec){
     return true;     
 }
 
-void printOutput(vector<int> output){
+void printOutput(vector<double> output){
     /*This is the function that outputs the final result*/
     for (int i = 0; i < output.size(); i++){
         cout << output[i] << "\n";
     }
 }
 
-void solveStep(vector<int>& numbers, vector<char>& key, int start_index) {
+void solveStep(vector<double>& numbers, vector<char>& key, int start_index) {
     /* Take in an expression vector, a key vector, and what the next step to perform is and update the vectors to simplify the expression. */
-    int answer;  // Variable that holds the answer to the step
+    double answer;  // Variable that holds the answer to the step
     if (key[start_index] == '('){  // Checks if the step is a paranthesis reduction step i.e. "(10)" -> "10"
         numbers[start_index] = numbers[start_index+1];
         key[start_index] = '0';
@@ -271,7 +271,7 @@ void solveStep(vector<int>& numbers, vector<char>& key, int start_index) {
         } else if (key[start_index + 1] == '/'){
             answer = numbers[start_index] / numbers[start_index + 2];
         } else if (key[start_index + 1] == '%'){
-            answer = numbers[start_index] % numbers[start_index + 2];
+            answer = (int)numbers[start_index] % (int)numbers[start_index + 2];
         }  else if (key[start_index + 1] == '^'){
             answer = pow(numbers[start_index], numbers[start_index + 2]);
         }
@@ -290,7 +290,7 @@ void solveStep(vector<int>& numbers, vector<char>& key, int start_index) {
 // Input further defined --> 3+2
 //      intVector - integers, Cannot be used to know where there is an operator, as we may have zeroes --> [302] - int vec
 //      keyVector - 0 in place of integer, otherwise symbol --> [0+0] - char vec
-int nextStep(vector<char> &keyVec, vector<int> &intVec) {
+int nextStep(vector<char> &keyVec, vector<double> &doubVec) {
     /* Find the index of the beginning of the next step */
 
     // Case 1- Is there an instance (num) - pass out [(num)] --> e.g. (3)
@@ -365,16 +365,16 @@ int nextStep(vector<char> &keyVec, vector<int> &intVec) {
     return 0; // Should never be reached, but if none of the following situations are found, returns 0.
 }
 
-void recSolve(vector<char> &keyVec, vector<int> &intVec) {
+void recSolve(vector<char> &keyVec, vector<double> &doubVec) {
     /* Uses a while loop to continually simplify the expresion step by step until a final solution is reached */
-    while (intVec.size() >= 1) { // Checks if the size of the integer vector is greater than or equal to 1
-        if (intVec.size() == 1) { // If the size is exactly 1, then a solution has been reached. The printOutput function prints the solution to the terminal
-            printOutput(intVec);
+    while (doubVec.size() >= 1) { // Checks if the size of the integer vector is greater than or equal to 1
+        if (doubVec.size() == 1) { // If the size is exactly 1, then a solution has been reached. The printOutput function prints the solution to the terminal
+            printOutput(doubVec);
             break;
         }
 
         // nextStep returns start index
-        // solveStep evaluates at index and updates keyVec and intVec
-        solveStep(intVec, keyVec, nextStep(keyVec, intVec));
+        // solveStep evaluates at index and updates keyVec and doubVec
+        solveStep(doubVec, keyVec, nextStep(keyVec, doubVec));
     }
 }
