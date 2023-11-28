@@ -1,0 +1,408 @@
+/*
+17 Calculator Co.
+Version 1.0
+Last Updated: 26 November 2023
+*/
+
+#include <iostream>
+#include <cmath>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+string collectInput();
+bool isValid(string userInput);
+vector<char> operatorVectorify(string userInput);
+vector<double> doubleVectorify(string userInput);
+double solver(string userInput);
+double loopSolver(vector<char>& keyVector, vector<double>& doubleVector);
+int nextStep(vector<char>& keyVec, vector<double>& doubVec);
+void solveStep(vector<double>& numbers, vector<char>& key, int start_index);
+void matcher(vector<char>& operatorVector, vector<double>& doubleVector);
+
+
+void print_expression(vector<double>& numVector, vector<char>& charVector) {
+    cout << "\n";
+    for (int i = 0; i < charVector.size(); i++) {
+        if (charVector[i] == '0') {
+            cout << numVector[i] << " ";
+        } else {
+            cout << charVector[i] << " ";
+        }
+    }
+    cout << "\n";
+}
+
+void print_vector(vector<double>& myVector) {
+    cout << "\nPRINTING: ";
+    for (int i = 0; i < myVector.size(); i++) {
+        cout << myVector[i] << " ";
+    }
+    cout << "\n";
+}
+
+void print_vector(vector<char>& myVector) {
+    cout << "\nPRINTING: ";
+    for (int i = 0; i < myVector.size(); i++) {
+        cout << myVector[i] << " ";
+    }
+    cout << "\n";
+}
+
+int main(){
+    string userInput;
+    while (true){
+        userInput = collectInput();
+        if (userInput == "exit"){
+            break;
+        }
+        if (isValid(userInput) == true){
+            cout << "Valid" << endl;
+            cout << solver(userInput) << "\n";
+        }  
+    }
+    return 0;
+}
+
+string collectInput(){
+    string input;
+    cout << "Enter an expression (or 'exit'): ";
+    getline(cin, input);
+
+    return input;
+}
+
+bool isValid(string userInput){
+    string validCharString = "0123456789+-*/()^% ";
+    for (int i = 0; i < userInput.size(); i++){
+        if (validCharString.find(userInput[i]) == string::npos){
+            cout << "Invalid character(s)!!! " << userInput[i] << endl;
+            return false;
+        }
+    }
+
+    vector<char> inputVector;
+
+    for (int i = 0; i < userInput.size(); i++){
+        if (userInput[i] == '1' || userInput[i] == '2' || userInput[i] == '3' || userInput[i] == '4' || userInput[i] == '5' || userInput[i] == '6' || userInput[i] == '7' || userInput[i] == '8' || userInput[i] == '9'){
+            inputVector.push_back('0');
+        }else if( userInput[i] != ' '){
+            inputVector.push_back(userInput[i]);
+        }
+    }
+    for (int i = inputVector.size() - 1; i > 0; i--){
+        if (inputVector[i] == inputVector[i-1] && inputVector[i] == '0'){
+            inputVector.erase(inputVector.begin() + i);
+            i--;
+        }
+    }
+    for (int i = inputVector.size() -1; i > 0; i--){
+        if (inputVector[i] == ' '){
+            inputVector.erase(inputVector.begin() + i);
+            i--;
+        }
+    }
+
+    int openCount = 0;
+    int closeCount = 0;
+
+    for (int i = 0; i < inputVector.size(); i++){
+        if (inputVector[i] == ')'){
+            closeCount++;
+        }
+        if (inputVector[i] == '('){
+            openCount++;
+        }
+    }
+    if (openCount != closeCount){
+        cout << "Unmatched Paranethesis!"<<endl;
+        return false;
+        
+    }
+
+    for(int i = 0; i < inputVector.size(); i++){
+        if (inputVector[i] == '*' || inputVector[i] == '/' || inputVector[i] == '%' || inputVector[i] == '^'){
+            if (i == 0){
+                cout << "Invalid usage of operator *, /, %, or ^" << endl;
+                return false;
+            }
+            if (i == inputVector.size() - 1){
+                cout << "Invalid usage of operator *, /, %, or ^" << endl;
+                return false;
+            }
+            if (inputVector[i-1] != '0' && inputVector[i-1] != ')'){
+                cout << "Invalid usage of operator *, /, %, or ^" << endl;
+                return false;
+            }
+            if (inputVector[i+1] != '0' && inputVector[i+1] != '('){
+                cout << "Invalid usage of operator *, /, %, or ^" << endl;
+                return false;
+            }
+        }
+    }
+    for (int i = 0; i < inputVector.size(); i++){
+        if (inputVector[i] == '+' || inputVector[i] == '-'){
+            if (i == inputVector.size() - 1){
+                cout << "Invalid usage of operator + or -" << endl;
+                return false;
+            }
+            if (inputVector[i+1] != '0' && inputVector[i+1] != '(' && inputVector[i+1] != '-' && inputVector[i+1] != '-'){
+                cout << "Invalid usage of operator + or -" << endl;
+                return false;
+            }
+            if (i != 0){
+                if (inputVector[i-1] != '0' && inputVector[i-1] != ')' && inputVector[i-1] != '(' && inputVector[i-1] != '-' && inputVector[i-1] != '+'){
+                    cout << "Invalid usage of operator + or -" << endl;
+                    return false;
+                }
+            }
+        }
+    }
+    for (int i = 0; i < inputVector.size(); i++){
+        if (inputVector[i] == '(' && i != 0){
+            if (inputVector[i-1] == '0'){
+                cout << "Missing operator before (" << endl;
+                return false;
+            }
+        }
+        if (inputVector[i] == ')' && i != inputVector.size() - 1){
+            if (inputVector[i+1] == '0' || inputVector[i+1] == '('){
+                cout << "Missing operator after )" << endl;
+                return false;
+            }
+        }
+    } 
+    cout<< "Valid Input!" << endl;
+    return true;
+}
+
+vector<char> operatorVectorify(string userInput){
+    string digits = "0123456789";
+    vector<char> operatorVector;
+    for (int i = 0; i < userInput.size(); i++){
+        if (digits.find(userInput[i]) != string::npos) {
+            operatorVector.push_back('0');
+        } else {
+            operatorVector.push_back(userInput[i]);
+        }
+    }
+    for (int i = operatorVector.size() - 1; i > 0; i--){
+        if (operatorVector[i] == operatorVector[i-1] && operatorVector[i] == '0'){
+            operatorVector.erase(operatorVector.begin() + i);
+            i--;
+        }
+    }
+    return operatorVector;
+}
+
+vector<double> doubleVectorify(string userInput) {
+    vector<double> doubleVector;
+    string digits = "0123456789";
+
+    double tempNum = 0;
+    bool isNumber = false;
+
+    for (int i = 0; i < userInput.size(); i++) {
+        if (digits.find(userInput[i]) != string::npos) {
+            tempNum = tempNum * 10 + (userInput[i] - '0');
+            isNumber = true;
+        } else if (isNumber) {
+            doubleVector.push_back(tempNum);
+            tempNum = 0;
+            isNumber = false;
+        }
+    }
+
+    if (isNumber) {  // To handle number at the end of the string
+        doubleVector.push_back(tempNum);
+    }
+
+    return doubleVector;
+}
+
+void matcher(vector<char>& operatorVector, vector<double>& doubleVector){
+    vector<double> tempDoubles;
+    int doubleIndex = 0;
+    for (int i = 0; i < operatorVector.size(); i++){
+        if (operatorVector[i] == '0'){
+            tempDoubles.push_back(doubleVector[doubleIndex]);
+            doubleIndex++;
+        }else{
+            tempDoubles.push_back(0);
+        }
+    }
+    doubleVector = tempDoubles;
+}
+
+double solver(string userInput){
+    vector<char> operatorVector = operatorVectorify(userInput);
+    vector<double> doubleVector = doubleVectorify(userInput);
+    print_vector(operatorVector);
+    print_vector(doubleVector);
+    matcher(operatorVector, doubleVector);
+    print_vector(operatorVector);
+    print_vector(doubleVector);
+    return loopSolver(operatorVector, doubleVector);
+}
+
+double loopSolver(vector<char>& keyVector, vector<double>& doubleVector){
+    /*
+    eveything before this function has been tested and is valid
+
+    operatorVector contains all operators in input order. All interger chars are replaces with zero. This does not include negative signs. 
+    all negative signs should be treated as unary operators.
+
+    doubleVector contains all numbers, as positive integers in input order.
+
+    This function should start by calling on the lowest priority operators with slices of the operatorVector and doubleVector until base cases are met.
+
+    Then the base cases should return up the stack, solving the higher priority operators until the final answer is returned. 
+
+
+    addition / subtraction (right to left)
+    multiplication / division / mod (right to left)
+    exponents
+    parentheses
+
+
+    Base Cases: TBD
+    */
+
+    /* Uses a while loop to continually simplify the expresion step by step until a final solution is reached */
+    while (doubleVector.size() >= 1) { // Checks if the size of the integer vector is greater than or equal to 1
+        if (doubleVector.size() == 1) { // If the size is exactly 1, then a solution has been reached. The printOutput function prints the solution to the terminal
+            return doubleVector[0];
+        }
+
+        // nextStep returns start index
+        // solveStep evaluates at index and updates keyVec and doubVec
+        solveStep(doubleVector, keyVector, nextStep(keyVector, doubleVector));
+    }
+
+    return 10;
+}
+
+void solveStep(vector<double>& numbers, vector<char>& key, int start_index) {
+    /* Take in an expression vector, a key vector, and what the next step to perform is and update the vectors to simplify the expression. */
+    double answer;  // Variable that holds the answer to the step
+    if (key[start_index] == '-') {
+        numbers.erase(numbers.begin() + start_index);  // gets rid of the operator out of the vector
+        key.erase(key.begin() + start_index);  // gets rid of the operator out of the key
+        numbers[start_index] = numbers[start_index] * -1;  // inverts the number
+
+    } else if (key[start_index] == '+') {
+        numbers.erase(numbers.begin() + start_index);
+        key.erase(key.begin() + start_index);
+        numbers[start_index] = abs(numbers[start_index]);
+
+    } else if (key[start_index] == '('){  // Checks if the step is a paranthesis reduction step i.e. "(10)" -> "10"
+        numbers[start_index] = numbers[start_index+1];
+        key[start_index] = '0';
+        numbers.erase(numbers.begin() + start_index+2);  // Edits the expression vector
+        numbers.erase(numbers.begin() + start_index+1);
+        key.erase(key.begin() + start_index+2);  // Edits the key vector
+        key.erase(key.begin() + start_index+1);
+    } else {  // If it's a normal math expression... 
+        if (key[start_index + 1] == '+') {  // Checks what operation
+            answer = numbers[start_index] + numbers[start_index + 2];
+        } else if (key[start_index + 1] == '-'){
+            answer = numbers[start_index] - numbers[start_index + 2];
+        } else if (key[start_index + 1] == '*'){
+            answer = numbers[start_index] * numbers[start_index + 2];
+        } else if (key[start_index + 1] == '/'){
+            answer = numbers[start_index] / numbers[start_index + 2];
+        } else if (key[start_index + 1] == '%'){
+            answer = (int)numbers[start_index] % (int)numbers[start_index + 2];
+        }  else if (key[start_index + 1] == '^'){
+            answer = pow(numbers[start_index], numbers[start_index + 2]);
+        }
+        
+        numbers[start_index] = answer; // Sets the first number in expression to the answer (so that it works when there is only expression left)
+        key[start_index] = '0';  // Updates key
+        numbers.erase(numbers.begin() + start_index + 2);  // Gets rid of used elements
+        numbers.erase(numbers.begin() + start_index + 1);
+        key.erase(key.begin() + start_index + 2);
+        key.erase(key.begin() + start_index + 1);
+    }
+}
+
+// Input a 2D vector that contains the key and the expression
+// Outputs nothing, but calls solveStep
+// Input further defined --> 3+2
+//      intVector - integers, Cannot be used to know where there is an operator, as we may have zeroes --> [302] - int vec
+//      keyVector - 0 in place of integer, otherwise symbol --> [0+0] - char vec
+int nextStep(vector<char>& keyVec, vector<double>& doubVec) {
+    /* Find the index of the beginning of the next step */
+
+    // Case 1- Is there an instance (num) - pass out [(num)] --> e.g. (3)
+    // keyVec.size() - 1 = the last index of keyVecs
+    for (int i = 0; i <=  keyVec.size() - 1; i++) {
+        if (keyVec[i] == '(') {
+            if (keyVec[i+2] == ')') {
+                // pass keyVec[i] - the start parenthesis
+                return i;
+            }
+        }
+    }
+
+    // Case 2 - Is there an instance of (expression) - always take first found, but farthest in
+    //      Iterate through and find last open, then find first close, and return last open index
+    //      If have (3+4), pass out [expression] --> e.g. 3+4
+    //      Case ((, case (3), case (3+4)
+    for (int i = 0; i <= keyVec.size() - 1; i++) {
+        if (keyVec[i] == '(') {
+            if (keyVec[i+1] == '(') continue; // Case (( --> skip iteration, move to the next one in
+            if (keyVec[i+2] == ')') continue; // Case (3) --> should be handled above, but check just in case
+            if (keyVec[i+2] != '0') { // Case ([NUM][OPERATOR][NUM]), ) already checked
+                // pass keyVec[i+1] - the start expression number
+                return i+1;
+            }
+        }
+    }
+
+    // Case 3 - num-operator-num --> e.g. 3*2 or 5^1
+    //      Handle in order of operations with modulo having the same precedence as multiplication and division.
+    //      Valid operators --> [+, -, *, /, %, ^]
+    //      Three groups of precedence. Each group is evaluated from left to right
+    //                1: Exponentials: e.g. 5^3
+    //                2: Multiplication / Division / Modulo: e.g. 3*2, 8/4, and 7%3 
+    //                3: Addition / Subtraction: e.g. 6+9 or 2-1
+    for (int i = 0; i < keyVec.size() - 2; i++) { // Iterates through the key vector
+        if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') { // Checks for an instance of num-operator-num
+            if (keyVec[i+1] == '^') { // If there is an instance of an exponential, it determines it to be the next step and returns the index of the first number in the grouping
+                return i;
+            }
+        }
+    }
+
+    for (int i = 0; i < keyVec.size() - 2; i++) {
+        if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') { // Checks again for an instance of num-operator-num in the key vector
+            if (keyVec[i+1] == '*' or keyVec[i+1] == '/' or keyVec[i+1] == '%') { // If there is an instance of multiplication, division, or modulo, returns the index of the first number in the grouping
+                if (keyVec[i+1] == '*') {
+                    return i;
+                }
+                else if (keyVec[i+1] == '/') {
+                    return i;
+                }
+                else if (keyVec[i+1] == '%') {
+                    return i;
+                }
+            }
+        }
+    }
+
+    for (int i = 0; i < keyVec.size() - 2; i++) {
+        if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') { // Checks again for an instance of num-operator-num in the key vector
+            if (keyVec[i+1] == '+' || keyVec[i+1] == ('-')) { // If there is an instance of addition or subtraction, returns the index of the first number in the grouping
+                if (keyVec[i+1] == '+') {
+                    return i;
+                }
+                else if (keyVec[i+1] == '-') {
+                    return i;
+                }
+            }
+        }
+    }
+    return 0; // Should never be reached, but if none of the following situations are found, returns 0.
+}
