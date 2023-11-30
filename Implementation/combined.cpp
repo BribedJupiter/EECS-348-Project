@@ -304,7 +304,7 @@ void solveStep(vector<double>& numbers, vector<char>& key, int start_index) {
     } else if (key[start_index] == '+') {
         numbers.erase(numbers.begin() + start_index);
         key.erase(key.begin() + start_index);
-        numbers[start_index] = abs(numbers[start_index]);
+        numbers[start_index] = numbers[start_index];
 
     } else if (key[start_index] == '('){  // Checks if the step is a paranthesis reduction step i.e. "(10)" -> "10"
         numbers[start_index] = numbers[start_index+1];
