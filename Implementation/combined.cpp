@@ -17,10 +17,17 @@ vector<char> operatorVectorify(string userInput);
 vector<double> doubleVectorify(string userInput);
 double solver(string userInput);
 double loopSolver(vector<char>& keyVector, vector<double>& doubleVector);
-int nextStep(vector<char>& keyVec, vector<double>& doubVec);
+int nextStep(vector<char>& keyVec, vector<double>& doubVec, int startIndex, int endIndex);
 void solveStep(vector<double>& numbers, vector<char>& key, int start_index);
 void matcher(vector<char>& operatorVector, vector<double>& doubleVector);
 
+void partial_print(vector<char>& key, int start, int end) {
+    cout << "\nPRINTING PART: ";
+    for (int i = start; i <= end; i++) {
+        cout << key[i] << " ";
+    }
+    cout << "\n";
+}
 
 void print_expression(vector<double>& numVector, vector<char>& charVector) {
     cout << "\n";
@@ -278,7 +285,7 @@ double loopSolver(vector<char>& keyVector, vector<double>& doubleVector){
 
         // nextStep returns start index
         // solveStep evaluates at index and updates keyVec and doubVec
-        solveStep(doubleVector, keyVector, nextStep(keyVector, doubleVector));
+        solveStep(doubleVector, keyVector, nextStep(keyVector, doubleVector, 0, keyVector.size()-1));
     }
 
     return 10;
@@ -297,7 +304,7 @@ void solveStep(vector<double>& numbers, vector<char>& key, int start_index) {
     } else if (key[start_index] == '+') {
         numbers.erase(numbers.begin() + start_index);
         key.erase(key.begin() + start_index);
-        numbers[start_index] = abs(numbers[start_index]);
+        numbers[start_index] = numbers[start_index];
 
     } else if (key[start_index] == '('){  // Checks if the step is a paranthesis reduction step i.e. "(10)" -> "10"
         numbers[start_index] = numbers[start_index+1];
@@ -333,11 +340,11 @@ void solveStep(vector<double>& numbers, vector<char>& key, int start_index) {
 
 // Input key vector and double vector
 // Outputs the beginning index  of the part of the expression that needs to be simplified next
-int nextStep(vector<char>& keyVec, vector<double>& doubVec) {
+int nextStep(vector<char>& keyVec, vector<double>& doubVec, int startIndex, int endIndex) {
     /* Find the index of the beginning of the next step */
 
     // Case 1 --> (number)
-    for (int i = 0; i <=  keyVec.size() - 1; i++) {
+    for (int i = startIndex; i <= endIndex; i++) {
         if (keyVec[i] == '(') {
             if (keyVec[i+2] == ')') {
                 // pass keyVec[i] - the start parenthesis
@@ -347,18 +354,30 @@ int nextStep(vector<char>& keyVec, vector<double>& doubVec) {
     }
 
     // Case 2 --> (expression)
-    for (int i = 0; i <= keyVec.size() - 1; i++) {
+    for (int i = startIndex; i <= endIndex; i++) {
         if (keyVec[i] == '(') {
-            if (keyVec[i+1] == '(') continue; // Case ((
-            if (keyVec[i+2] == ')') continue; // Case (number)
-            if (keyVec[i+2] != '0') { // Case (expression)
-                return i+1;
+            int lastParan;
+            int open = 0;
+            int closed = 0;
+            for (int j = i; j <= endIndex; j++) {
+                if (keyVec[j] == '(') {
+                    open += 1;
+                } else if (keyVec[j] == ')') {
+                    closed += 1;
+                    if (open == closed) {
+                        lastParan = j;
+                        break;
+                    }
+                }
+
             }
-        }
+                //cout << "\n" << i+1 << " -> " << lastParan << "\n";
+                return nextStep(keyVec, doubVec, i+1, lastParan-1);
+            }
     }
 
     // Case 4 - PEMDAS
-    for (int i = 0; i < keyVec.size() - 2; i++) { // Iterates through the key vector
+    for (int i = startIndex; i <= endIndex; i++) { // Iterates through the key vector
         if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') { // Checks for an instance of num-operator-num
             if (keyVec[i+1] == '^') { // If there is an instance of an exponential, it determines it to be the next step and returns the index of the first number in the grouping
                 return i;
@@ -367,9 +386,9 @@ int nextStep(vector<char>& keyVec, vector<double>& doubVec) {
     }
 
      // Case 3 --> -number or +number (unary operator)
-    for (int i = 0; i <= keyVec.size() - 1; i++) {
+    for (int i = startIndex; i <= endIndex; i++) {
         if (keyVec[i] == '-') { // Check that it is NOT addition
-            if (keyVec[i-1] == '0' && keyVec[i+1] == '0') {
+            if ((keyVec[i-1] == '0' || keyVec[i-1] == ')') && (keyVec[i+1] == '0' || keyVec[i+1] == '(')) {
                 break;
             }
             else {
@@ -390,7 +409,7 @@ int nextStep(vector<char>& keyVec, vector<double>& doubVec) {
         }
     }
 
-    for (int i = 0; i < keyVec.size() - 2; i++) {
+    for (int i = startIndex; i <= endIndex; i++) {
         if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') { // Checks again for an instance of num-operator-num in the key vector
             if (keyVec[i+1] == '*' or keyVec[i+1] == '/' or keyVec[i+1] == '%') { // If there is an instance of multiplication, division, or modulo, returns the index of the first number in the grouping
                 if (keyVec[i+1] == '*') {
@@ -406,7 +425,7 @@ int nextStep(vector<char>& keyVec, vector<double>& doubVec) {
         }
     }
 
-    for (int i = 0; i < keyVec.size() - 2; i++) {
+    for (int i = startIndex; i <= endIndex; i++) {
         if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') { // Checks again for an instance of num-operator-num in the key vector
             if (keyVec[i+1] == '+' || keyVec[i+1] == ('-')) { // If there is an instance of addition or subtraction, returns the index of the first number in the grouping
                 if (keyVec[i+1] == '+') {
