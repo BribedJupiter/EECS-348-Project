@@ -178,7 +178,7 @@ bool isValid(string userInput){
 }
 
 vector<char> operatorVectorify(string userInput){
-    string digits = "0123456789";
+    string digits = "0123456789 ";
     vector<char> operatorVector;
     for (int i = 0; i < userInput.size(); i++){
         if (digits.find(userInput[i]) != string::npos) {
@@ -187,10 +187,11 @@ vector<char> operatorVectorify(string userInput){
             operatorVector.push_back(userInput[i]);
         }
     }
+
     for (int i = operatorVector.size() - 1; i > 0; i--){
         if (operatorVector[i] == operatorVector[i-1] && operatorVector[i] == '0'){
             operatorVector.erase(operatorVector.begin() + i);
-            i--;
+            //i--;
         }
     }
     return operatorVector;
