@@ -135,7 +135,7 @@ bool isValid(string userInput){
                 cout << "Invalid usage of operator *, /, %, or ^" << endl;
                 return false;
             }
-            if (inputVector[i+1] != '0' && inputVector[i+1] != '('){
+            if (inputVector[i+1] != '0' && inputVector[i+1] != '(' && inputVector[i+1] != '+' && inputVector[i+1] != '-'){
                 cout << "Invalid usage of operator *, /, %, or ^" << endl;
                 return false;
             }
@@ -147,16 +147,16 @@ bool isValid(string userInput){
                 cout << "Invalid usage of operator + or -" << endl;
                 return false;
             }
-            if (inputVector[i+1] != '0' && inputVector[i+1] != '(' && inputVector[i+1] != '-' && inputVector[i+1] != '-'){
+            if (inputVector[i+1] != '0' && inputVector[i+1] != '(' && inputVector[i+1] != '-' && inputVector[i+1] != '+'){
                 cout << "Invalid usage of operator + or -" << endl;
                 return false;
             }
-            if (i != 0){
-                if (inputVector[i-1] != '0' && inputVector[i-1] != ')' && inputVector[i-1] != '(' && inputVector[i-1] != '-' && inputVector[i-1] != '+'){
-                    cout << "Invalid usage of operator + or -" << endl;
-                    return false;
-                }
-            }
+            // if (i != 0){
+            //     if (inputVector[i-1] != '0' && inputVector[i-1] != ')' && inputVector[i-1] != '(' && inputVector[i-1] != '-' && inputVector[i-1] != '+' && inputVector[i+1] != '*' && inputVector[i+1] != '/'){
+            //         cout << "Invalid usage of operator + or -" << endl;
+            //         return false;
+            //     }
+            // }
         }
     }
     for (int i = 0; i < inputVector.size(); i++){
@@ -286,6 +286,8 @@ double loopSolver(vector<char>& keyVector, vector<double>& doubleVector){
 
 void solveStep(vector<double>& numbers, vector<char>& key, int start_index) {
     /* Take in an expression vector, a key vector, and what the next step to perform is and update the vectors to simplify the expression. */
+    cout << start_index << " ";
+    print_expression(numbers, key);
     double answer;  // Variable that holds the answer to the step
     if (key[start_index] == '-') {
         numbers.erase(numbers.begin() + start_index);  // gets rid of the operator out of the vector
@@ -314,7 +316,7 @@ void solveStep(vector<double>& numbers, vector<char>& key, int start_index) {
         } else if (key[start_index + 1] == '/'){
             answer = numbers[start_index] / numbers[start_index + 2];
         } else if (key[start_index + 1] == '%'){
-            answer = (int)numbers[start_index] % (int)numbers[start_index + 2];
+            answer = double((int)numbers[start_index] % (int)numbers[start_index + 2]);
         }  else if (key[start_index + 1] == '^'){
             answer = pow(numbers[start_index], numbers[start_index + 2]);
         }
@@ -326,6 +328,7 @@ void solveStep(vector<double>& numbers, vector<char>& key, int start_index) {
         key.erase(key.begin() + start_index + 2);
         key.erase(key.begin() + start_index + 1);
     }
+    
 }
 
 // Input key vector and double vector
