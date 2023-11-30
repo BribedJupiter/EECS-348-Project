@@ -372,7 +372,6 @@ int nextStep(vector<char>& keyVec, vector<double>& doubVec, int startIndex, int 
 
             }
                 //cout << "\n" << i+1 << " -> " << lastParan << "\n";
-                partial_print(keyVec, i+1, lastParan-1);
                 return nextStep(keyVec, doubVec, i+1, lastParan-1);
             }
     }
