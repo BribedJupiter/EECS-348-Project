@@ -354,20 +354,35 @@ int nextStep(vector<char>& keyVec, vector<double>& doubVec) {
         }
     }
 
-    // Case 3 --> -number or +number (unary operator)
-    for (int i = 0; i <= keyVec.size() - 1; i++) {
-        if (keyVec[i] == '-' || keyVec[i] == '+') {
-            if (keyVec[i+1] == '0') {
-                return i;
-            }
-        }
-    }
-
     // Case 4 - PEMDAS
     for (int i = 0; i < keyVec.size() - 2; i++) { // Iterates through the key vector
         if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') { // Checks for an instance of num-operator-num
             if (keyVec[i+1] == '^') { // If there is an instance of an exponential, it determines it to be the next step and returns the index of the first number in the grouping
                 return i;
+            }
+        }
+    }
+
+     // Case 3 --> -number or +number (unary operator)
+    for (int i = 0; i <= keyVec.size() - 1; i++) {
+        if (keyVec[i] == '-') { // Check that it is NOT addition
+            if (keyVec[i-1] == '0' && keyVec[i+1] == '0') {
+                break;
+            }
+            else {
+                if (keyVec[i+1] == '0') {
+                    return i;
+                }
+            }
+        }
+        if (keyVec[i] == '+') { // Check that it is NOT addition
+            if (keyVec[i-1] == '0' && keyVec[i+1] == '0') {
+                break;
+            }
+            else {
+                if (keyVec[i+1] == '0') {
+                    return i;
+                }
             }
         }
     }
