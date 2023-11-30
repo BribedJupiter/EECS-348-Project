@@ -356,21 +356,25 @@ int nextStep(vector<char>& keyVec, vector<double>& doubVec, int startIndex, int 
     // Case 2 --> (expression)
     for (int i = startIndex; i <= endIndex; i++) {
         if (keyVec[i] == '(') {
-            if (keyVec[i+1] == '(') continue; // Case ((
-            if (keyVec[i+2] == ')') continue; // Case (number)
-            if (keyVec[i+2] != '0') { // Case (expression)
-            int lastParan = endIndex;
-            for (int j = endIndex; j >= i; j--) {
-                if (keyVec[j] == ')') {
-                    lastParan = j;
-                    break;
+            int lastParan;
+            int open = 0;
+            int closed = 0;
+            for (int j = i; j <= endIndex; j++) {
+                if (keyVec[j] == '(') {
+                    open += 1;
+                } else if (keyVec[j] == ')') {
+                    closed += 1;
+                    if (open == closed) {
+                        lastParan = j;
+                        break;
+                    }
                 }
+
             }
                 //cout << "\n" << i+1 << " -> " << lastParan << "\n";
                 partial_print(keyVec, i+1, lastParan-1);
                 return nextStep(keyVec, doubVec, i+1, lastParan-1);
             }
-        }
     }
 
     // Case 4 - PEMDAS
