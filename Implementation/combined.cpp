@@ -8,6 +8,7 @@ Last Updated: 26 November 2023
 #include <cmath>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -65,10 +66,11 @@ int main(){
             break;
         }
         if (isValid(userInput) == true){
-            cout << "Valid" << endl;
-            cout << solver(userInput) << "\n";
+            //cout << "Valid" << endl;
+            cout << solver(userInput) << "\n\n";
         }  
     }
+    
     return 0;
 }
 
@@ -76,6 +78,7 @@ string collectInput(){
     string input;
     cout << "Enter an expression (or 'exit'): ";
     getline(cin, input);
+    input.erase(remove(input.begin(), input.end(), ' '), input.end());
 
     return input;
 }
@@ -98,12 +101,14 @@ bool isValid(string userInput){
             inputVector.push_back(userInput[i]);
         }
     }
+
     for (int i = inputVector.size() - 1; i > 0; i--){
         if (inputVector[i] == inputVector[i-1] && inputVector[i] == '0'){
             inputVector.erase(inputVector.begin() + i);
             i--;
         }
     }
+
     for (int i = inputVector.size() -1; i > 0; i--){
         if (inputVector[i] == ' '){
             inputVector.erase(inputVector.begin() + i);
@@ -126,6 +131,13 @@ bool isValid(string userInput){
         cout << "Unmatched Paranethesis!"<<endl;
         return false;
         
+    }
+
+    for(int i = 0; i < inputVector.size(); i++) {  // Handles checking for paranthesis with no internal statement
+        if (inputVector[i] == '(' && inputVector[i+1] == ')') {
+            cout << "Invalid Paranethesis! Must have statement inside." << endl;
+            return false;
+        }
     }
 
     for(int i = 0; i < inputVector.size(); i++){
@@ -180,7 +192,7 @@ bool isValid(string userInput){
             }
         }
     } 
-    cout<< "Valid Input!" << endl;
+    //cout<< "Valid Input!" << endl;
     return true;
 }
 
@@ -246,11 +258,11 @@ void matcher(vector<char>& operatorVector, vector<double>& doubleVector){
 double solver(string userInput){
     vector<char> operatorVector = operatorVectorify(userInput);
     vector<double> doubleVector = doubleVectorify(userInput);
-    print_vector(operatorVector);
-    print_vector(doubleVector);
+    //print_vector(operatorVector);
+    //print_vector(doubleVector);
     matcher(operatorVector, doubleVector);
-    print_vector(operatorVector);
-    print_vector(doubleVector);
+    //print_vector(operatorVector);
+    //print_vector(doubleVector);
     return loopSolver(operatorVector, doubleVector);
 }
 
@@ -293,8 +305,10 @@ double loopSolver(vector<char>& keyVector, vector<double>& doubleVector){
 
 void solveStep(vector<double>& numbers, vector<char>& key, int start_index) {
     /* Take in an expression vector, a key vector, and what the next step to perform is and update the vectors to simplify the expression. */
-    cout << start_index << " ";
-    print_expression(numbers, key);
+    //cout << start_index << " ";
+    //print_expression(numbers, key);
+    //print_vector(numbers);
+    //print_vector(key);
     double answer;  // Variable that holds the answer to the step
     if (key[start_index] == '-') {
         numbers.erase(numbers.begin() + start_index);  // gets rid of the operator out of the vector
@@ -344,7 +358,7 @@ int nextStep(vector<char>& keyVec, vector<double>& doubVec, int startIndex, int 
     /* Find the index of the beginning of the next step */
 
     // Case 1 --> (number)
-    for (int i = startIndex; i <= endIndex; i++) {
+    for (int i = startIndex; i <= endIndex-1; i++) {
         if (keyVec[i] == '(') {
             if (keyVec[i+2] == ')') {
                 // pass keyVec[i] - the start parenthesis
@@ -354,7 +368,7 @@ int nextStep(vector<char>& keyVec, vector<double>& doubVec, int startIndex, int 
     }
 
     // Case 2 --> (expression)
-    for (int i = startIndex; i <= endIndex; i++) {
+    for (int i = startIndex; i <= endIndex-1; i++) {
         if (keyVec[i] == '(') {
             int lastParan;
             int open = 0;
@@ -377,22 +391,24 @@ int nextStep(vector<char>& keyVec, vector<double>& doubVec, int startIndex, int 
     }
 
     // Case 4 - PEMDAS
-    for (int i = startIndex; i <= endIndex; i++) { // Iterates through the key vector
+    for (int i = startIndex; i <= endIndex-1; i++) { // Iterates through the key vector
         if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') { // Checks for an instance of num-operator-num
             if (keyVec[i+1] == '^') { // If there is an instance of an exponential, it determines it to be the next step and returns the index of the first number in the grouping
+                //cout << "EXPONENT!\n";
                 return i;
             }
         }
     }
 
      // Case 3 --> -number or +number (unary operator)
-    for (int i = startIndex; i <= endIndex; i++) {
-        if (keyVec[i] == '-') { // Check that it is NOT addition
+    for (int i = startIndex; i <= endIndex-1; i++) {
+        if (keyVec[i] == '-') { // Check that it is NOT subtraction
             if ((keyVec[i-1] == '0' || keyVec[i-1] == ')') && (keyVec[i+1] == '0' || keyVec[i+1] == '(')) {
                 break;
             }
             else {
                 if (keyVec[i+1] == '0') {
+                    //cout << "UNARY-\n";
                     return i;
                 }
             }
@@ -403,35 +419,41 @@ int nextStep(vector<char>& keyVec, vector<double>& doubVec, int startIndex, int 
             }
             else {
                 if (keyVec[i+1] == '0') {
+                    //cout << "UNARY+\n";
                     return i;
                 }
             }
         }
     }
 
-    for (int i = startIndex; i <= endIndex; i++) {
+    for (int i = startIndex; i <= endIndex-1; i++) {
         if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') { // Checks again for an instance of num-operator-num in the key vector
             if (keyVec[i+1] == '*' or keyVec[i+1] == '/' or keyVec[i+1] == '%') { // If there is an instance of multiplication, division, or modulo, returns the index of the first number in the grouping
                 if (keyVec[i+1] == '*') {
+                    //cout << "* TIME\n";
                     return i;
                 }
                 else if (keyVec[i+1] == '/') {
+                    //cout << "/ TIME\n";
                     return i;
                 }
                 else if (keyVec[i+1] == '%') {
+                    //cout << "% TIME\n";
                     return i;
                 }
             }
         }
     }
 
-    for (int i = startIndex; i <= endIndex; i++) {
+    for (int i = startIndex; i <= endIndex-1; i++) {
         if (keyVec[i] == '0' && keyVec[i+1] != '0' && keyVec[i+1] != '(' && keyVec[i+1] != ')' && keyVec[i+2] == '0') { // Checks again for an instance of num-operator-num in the key vector
             if (keyVec[i+1] == '+' || keyVec[i+1] == ('-')) { // If there is an instance of addition or subtraction, returns the index of the first number in the grouping
                 if (keyVec[i+1] == '+') {
+                    //cout << "ADDITION\n";
                     return i;
                 }
                 else if (keyVec[i+1] == '-') {
+                    //cout << "SUBTRACTION\n";
                     return i;
                 }
             }
