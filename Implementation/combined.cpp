@@ -70,10 +70,12 @@ int main(){
                 //cout << "Valid" << endl;
                 cout << solver(userInput) << "\n\n";
             }  
+        } catch (domain_error) {
+            cout << "Error - Division by zero" << endl << endl;
+        } catch (invalid_argument) { // This is for roots of negatives
+            cout << "Error - Root of a negative number" << endl << endl;
         }
-        catch (domain_error) {
-            cout << "Error - Division by zero" << endl;
-        }
+        
     }
     return 0;
 }
@@ -343,6 +345,9 @@ void solveStep(vector<double>& numbers, vector<char>& key, int start_index) {
         } else if (key[start_index + 1] == '%'){
             answer = double((int)numbers[start_index] % (int)numbers[start_index + 2]);
         }  else if (key[start_index + 1] == '^'){
+            if ((numbers[start_index + 2] < 1 && numbers[start_index + 2] > -1 && numbers[start_index + 2] != 0) && (numbers[start_index] < 0)) {
+                throw invalid_argument("Error - Root of a negative number"); // Throws an error for taking the square root of
+            }
             answer = pow(numbers[start_index], numbers[start_index + 2]);
         }
         
