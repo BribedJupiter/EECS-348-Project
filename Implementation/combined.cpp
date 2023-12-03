@@ -1,7 +1,7 @@
 /*
 17 Calculator Co.
 Version 1.0
-Last Updated: 26 November 2023
+Last Updated: 03 December 2023
 */
 
 #include <iostream>
@@ -87,7 +87,7 @@ bool isValid(string userInput){
     string validCharString = "0123456789+-*/()^% ";
     for (int i = 0; i < userInput.size(); i++){
         if (validCharString.find(userInput[i]) == string::npos){
-            cout << "Invalid character(s)!!! " << userInput[i] << endl;
+            cout << "Error - Invalid character(s) " << userInput[i] << endl;
             return false;
         }
     }
@@ -128,14 +128,14 @@ bool isValid(string userInput){
         }
     }
     if (openCount != closeCount){
-        cout << "Unmatched Paranethesis!"<<endl;
+        cout << "Error - Unmatched Paranetheses"<<endl;
         return false;
         
     }
 
     for(int i = 0; i < inputVector.size(); i++) {  // Handles checking for paranthesis with no internal statement
         if (inputVector[i] == '(' && inputVector[i+1] == ')') {
-            cout << "Invalid Paranethesis! Must have statement inside." << endl;
+            cout << "Error - Invalid Paranetheses. Must have statement inside." << endl;
             return false;
         }
     }
@@ -143,19 +143,19 @@ bool isValid(string userInput){
     for(int i = 0; i < inputVector.size(); i++){
         if (inputVector[i] == '*' || inputVector[i] == '/' || inputVector[i] == '%' || inputVector[i] == '^'){
             if (i == 0){
-                cout << "Invalid usage of operator *, /, %, or ^" << endl;
+                cout << "Error - Invalid usage of operator *, /, %, or ^" << endl;
                 return false;
             }
             if (i == inputVector.size() - 1){
-                cout << "Invalid usage of operator *, /, %, or ^" << endl;
+                cout << "Error - Invalid usage of operator *, /, %, or ^" << endl;
                 return false;
             }
             if (inputVector[i-1] != '0' && inputVector[i-1] != ')'){
-                cout << "Invalid usage of operator *, /, %, or ^" << endl;
+                cout << "Error - Invalid usage of operator *, /, %, or ^" << endl;
                 return false;
             }
             if (inputVector[i+1] != '0' && inputVector[i+1] != '(' && inputVector[i+1] != '+' && inputVector[i+1] != '-'){
-                cout << "Invalid usage of operator *, /, %, or ^" << endl;
+                cout << "Error - Invalid usage of operator *, /, %, or ^" << endl;
                 return false;
             }
         }
@@ -163,11 +163,11 @@ bool isValid(string userInput){
     for (int i = 0; i < inputVector.size(); i++){
         if (inputVector[i] == '+' || inputVector[i] == '-'){
             if (i == inputVector.size() - 1){
-                cout << "Invalid usage of operator + or -" << endl;
+                cout << "Error - Invalid usage of operator + or -" << endl;
                 return false;
             }
             if (inputVector[i+1] != '0' && inputVector[i+1] != '(' && inputVector[i+1] != '-' && inputVector[i+1] != '+'){
-                cout << "Invalid usage of operator + or -" << endl;
+                cout << "Error - Invalid usage of operator + or -" << endl;
                 return false;
             }
             // if (i != 0){
@@ -181,13 +181,13 @@ bool isValid(string userInput){
     for (int i = 0; i < inputVector.size(); i++){
         if (inputVector[i] == '(' && i != 0){
             if (inputVector[i-1] == '0'){
-                cout << "Missing operator before (" << endl;
+                cout << "Error - Missing operator before (" << endl;
                 return false;
             }
         }
         if (inputVector[i] == ')' && i != inputVector.size() - 1){
             if (inputVector[i+1] == '0' || inputVector[i+1] == '('){
-                cout << "Missing operator after )" << endl;
+                cout << "Error - Missing operator after )" << endl;
                 return false;
             }
         }
@@ -268,8 +268,6 @@ double solver(string userInput){
 
 double loopSolver(vector<char>& keyVector, vector<double>& doubleVector){
     /*
-    eveything before this function has been tested and is valid
-
     operatorVector contains all operators in input order. All interger chars are replaces with zero. This does not include negative signs. 
     all negative signs should be treated as unary operators.
 
@@ -284,9 +282,6 @@ double loopSolver(vector<char>& keyVector, vector<double>& doubleVector){
     multiplication / division / mod (right to left)
     exponents
     parentheses
-
-
-    Base Cases: TBD
     */
 
     /* Uses a while loop to continually simplify the expresion step by step until a final solution is reached */
