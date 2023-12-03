@@ -61,16 +61,20 @@ void print_vector(vector<char>& myVector) {
 int main(){
     string userInput;
     while (true){
-        userInput = collectInput();
-        if (userInput == "exit"){
-            break;
+        try {
+            userInput = collectInput();
+            if (userInput == "exit"){
+                break;
+            }
+            if (isValid(userInput) == true){
+                //cout << "Valid" << endl;
+                cout << solver(userInput) << "\n\n";
+            }  
         }
-        if (isValid(userInput) == true){
-            //cout << "Valid" << endl;
-            cout << solver(userInput) << "\n\n";
-        }  
+        catch (domain_error) {
+            cout << "Error - Division by zero" << endl;
+        }
     }
-    
     return 0;
 }
 
@@ -330,7 +334,12 @@ void solveStep(vector<double>& numbers, vector<char>& key, int start_index) {
         } else if (key[start_index + 1] == '*'){
             answer = numbers[start_index] * numbers[start_index + 2];
         } else if (key[start_index + 1] == '/'){
-            answer = numbers[start_index] / numbers[start_index + 2];
+            if (numbers[start_index + 2] == 0) {
+                throw domain_error("Error - Division by zero");
+            }
+            else {
+                answer = numbers[start_index] / numbers[start_index + 2];
+            }
         } else if (key[start_index + 1] == '%'){
             answer = double((int)numbers[start_index] % (int)numbers[start_index + 2]);
         }  else if (key[start_index + 1] == '^'){
