@@ -23,6 +23,7 @@ void solveStep(vector<double>& numbers, vector<char>& key, int start_index);
 void matcher(vector<char>& operatorVector, vector<double>& doubleVector);
 
 void partial_print(vector<char>& key, int start, int end) {
+    /* Debug function used to print a vector from start to end index */
     cout << "\nPRINTING PART: ";
     for (int i = start; i <= end; i++) {
         cout << key[i] << " ";
@@ -31,6 +32,7 @@ void partial_print(vector<char>& key, int start, int end) {
 }
 
 void print_expression(vector<double>& numVector, vector<char>& charVector) {
+    /* Debug function that prints an expression given the key and number vectors */
     cout << "\n";
     for (int i = 0; i < charVector.size(); i++) {
         if (charVector[i] == '0') {
@@ -43,6 +45,7 @@ void print_expression(vector<double>& numVector, vector<char>& charVector) {
 }
 
 void print_vector(vector<double>& myVector) {
+    /* Debug function that prints a double vector */
     cout << "\nPRINTING: ";
     for (int i = 0; i < myVector.size(); i++) {
         cout << myVector[i] << " ";
@@ -51,6 +54,7 @@ void print_vector(vector<double>& myVector) {
 }
 
 void print_vector(vector<char>& myVector) {
+    /* Debug function that prints a character vector */
     cout << "\nPRINTING: ";
     for (int i = 0; i < myVector.size(); i++) {
         cout << myVector[i] << " ";
@@ -59,7 +63,8 @@ void print_vector(vector<char>& myVector) {
 }
 
 int main(){
-    string userInput;
+    /* Main function that runs the program */
+    string userInput;  // Var that will hold the user's input
     while (true){
         try {
             userInput = collectInput();
@@ -85,6 +90,7 @@ int main(){
 }
 
 string collectInput(){
+    /* Function that collects the mathematical expression from the user and cleans it. Returns a string. */
     string input;
     cout << "Enter an expression (or 'exit'): ";
     getline(cin, input);
@@ -100,6 +106,7 @@ string collectInput(){
 }
 
 bool isValid(string userInput){
+    /* Checks for the validity of statements provided by the user */
     string validCharString = "0123456789+-*/()^% ";
     for (int i = 0; i < userInput.size(); i++){
         if (validCharString.find(userInput[i]) == string::npos){
@@ -213,6 +220,7 @@ bool isValid(string userInput){
 }
 
 vector<char> operatorVectorify(string userInput){
+    /* Function takes in a string (user's input) and returns a character vector with the operations */
     string digits = "0123456789 ";
     vector<char> operatorVector;
     for (int i = 0; i < userInput.size(); i++){
@@ -233,6 +241,7 @@ vector<char> operatorVectorify(string userInput){
 }
 
 vector<double> doubleVectorify(string userInput) {
+    /* Function takes in a string (user's input) and returns a double vector with values */
     vector<double> doubleVector;
     string digits = "0123456789";
 
