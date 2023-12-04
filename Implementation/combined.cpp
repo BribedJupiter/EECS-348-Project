@@ -12,6 +12,8 @@ Last Updated: 03 December 2023
 
 using namespace std;
 
+
+// Declarations of function usage can be found in each function's docstring
 string collectInput();
 bool isValid(string userInput);
 vector<char> operatorVectorify(string userInput);
@@ -121,21 +123,21 @@ bool isValid(string userInput){
 
     for (int i = 0; i < userInput.size(); i++){
         if (userInput[i] == '1' || userInput[i] == '2' || userInput[i] == '3' || userInput[i] == '4' || userInput[i] == '5' || userInput[i] == '6' || userInput[i] == '7' || userInput[i] == '8' || userInput[i] == '9'){
-            inputVector.push_back('0');
-        }else if( userInput[i] != ' '){
+            inputVector.push_back('0');  // Pushes 0s in the char vecetor wherever a number is
+        }else if( userInput[i] != ' '){  // If it's not a number, and not a space
             inputVector.push_back(userInput[i]);
         }
     }
 
     for (int i = inputVector.size() - 1; i > 0; i--){
-        if (inputVector[i] == inputVector[i-1] && inputVector[i] == '0'){
+        if (inputVector[i] == inputVector[i-1] && inputVector[i] == '0'){  // Checks for multile numbers next to each other
             inputVector.erase(inputVector.begin() + i);
             i--;
         }
     }
 
     for (int i = inputVector.size() -1; i > 0; i--){
-        if (inputVector[i] == ' '){
+        if (inputVector[i] == ' '){  // Checks for spaces
             inputVector.erase(inputVector.begin() + i);
             i--;
         }
@@ -144,7 +146,7 @@ bool isValid(string userInput){
     int openCount = 0;
     int closeCount = 0;
 
-    for (int i = 0; i < inputVector.size(); i++){
+    for (int i = 0; i < inputVector.size(); i++){ // Checks for matching number of parantheses
         if (inputVector[i] == ')'){
             closeCount++;
         }
@@ -166,7 +168,7 @@ bool isValid(string userInput){
     }
 
     for(int i = 0; i < inputVector.size(); i++){
-        if (inputVector[i] == '*' || inputVector[i] == '/' || inputVector[i] == '%' || inputVector[i] == '^'){
+        if (inputVector[i] == '*' || inputVector[i] == '/' || inputVector[i] == '%' || inputVector[i] == '^'){  // Operator usage checking
             if (i == 0){
                 cout << "Error - Invalid usage of operator *, /, %, or ^" << endl;
                 return false;
@@ -203,7 +205,7 @@ bool isValid(string userInput){
             // }
         }
     }
-    for (int i = 0; i < inputVector.size(); i++){
+    for (int i = 0; i < inputVector.size(); i++){  // Checks for valid parentheses usage
         if (inputVector[i] == '(' && i != 0){
             if (inputVector[i-1] == '0'){
                 cout << "Error - Missing operator before (" << endl;
