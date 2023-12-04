@@ -70,10 +70,14 @@ int main(){
                 //cout << "Valid" << endl;
                 cout << solver(userInput) << "\n\n";
             }  
-        } catch (domain_error) {
+        } catch (domain_error) { // This is to handle division by zero
             cout << "Error - Division by zero" << endl << endl;
         } catch (invalid_argument) { // This is for roots of negatives
             cout << "Error - Root of a negative number" << endl << endl;
+        } catch (out_of_range) { // This is to handle if no input is provided
+            cout << "Error - Input must be provided" << endl << endl;
+        } catch (logic_error) { // This is to handle if input is all spaces
+            cout << "Error - Input cannot be all spaces" << endl << endl;
         }
         
     }
@@ -84,6 +88,12 @@ string collectInput(){
     string input;
     cout << "Enter an expression (or 'exit'): ";
     getline(cin, input);
+    if (input.empty()) { // If the string is empty, raise an error
+        throw out_of_range("Error - Input must be provided");
+    }
+    if (input.find_first_not_of(' ') > input.length()) { // If the first non-space character is after the end of the string, then we know the string is all spaces
+        throw logic_error("Error - Input cannot be all spaces");
+    }
     input.erase(remove(input.begin(), input.end(), ' '), input.end());
 
     return input;
@@ -346,7 +356,7 @@ void solveStep(vector<double>& numbers, vector<char>& key, int start_index) {
             answer = double((int)numbers[start_index] % (int)numbers[start_index + 2]);
         }  else if (key[start_index + 1] == '^'){
             if ((numbers[start_index + 2] < 1 && numbers[start_index + 2] > -1 && numbers[start_index + 2] != 0) && (numbers[start_index] < 0)) {
-                throw invalid_argument("Error - Root of a negative number"); // Throws an error for taking the square root of
+                throw invalid_argument("Error - Root of a negative number"); // Throws an error for taking the square root of a negative number
             }
             answer = pow(numbers[start_index], numbers[start_index + 2]);
         }
