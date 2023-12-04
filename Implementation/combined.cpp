@@ -62,6 +62,8 @@ void print_vector(vector<char>& myVector) {
     cout << "\n";
 }
 
+// MAIN CODE STARTS HERE
+
 int main(){
     /* Main function that runs the program */
     string userInput;  // Var that will hold the user's input
@@ -267,6 +269,7 @@ vector<double> doubleVectorify(string userInput) {
 }
 
 void matcher(vector<char>& operatorVector, vector<double>& doubleVector){
+    /* Ensure that the operator and double vectors are matched in terms of indicies */
     vector<double> tempDoubles;
     int doubleIndex = 0;
     for (int i = 0; i < operatorVector.size(); i++){
@@ -281,6 +284,7 @@ void matcher(vector<char>& operatorVector, vector<double>& doubleVector){
 }
 
 double solver(string userInput){
+    /* Handles the starting of the solving of the expression */
     vector<char> operatorVector = operatorVectorify(userInput);
     vector<double> doubleVector = doubleVectorify(userInput);
     //print_vector(operatorVector);
