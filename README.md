@@ -6,7 +6,9 @@
 
 This project uses C++ to implement a calculator app through the console. The user will input an expression and the app will calculate a result and provide it back to the user.  
 
-Documentation files are located in the *Documentation* folder. Implemntation files, such as source files, are located in the *Implementation* folder. Additionally, this repository will store the finalized version of each document, to be updated at the end of each project phase. Live documents are shared through our Canvas group, group 17, as part of the EECS 348 course Canvas page or our OneDrive. 
+Documentation files are located in the *Documentation* folder. Implementation files, such as source files, are located in the *Implementation* folder. Additionally, this repository will store the finalized version of each document, to be updated at the end of each project phase. Live documents are shared through our Canvas group, group 17, as part of the EECS 348 course Canvas page or our OneDrive. 
+
+To learn more about how to use 17 Co. Calculator, you can find the User Manual here: https://github.com/Lester822/EECS-348-Project/blob/main/Documentation/17%20Co%20-%20User%20Manual.pdf
 
 ## Teammember Details
 
